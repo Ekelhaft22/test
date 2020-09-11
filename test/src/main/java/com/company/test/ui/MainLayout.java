@@ -1,10 +1,18 @@
 
 package com.company.test.ui;
 
+import java.beans.Beans;
+
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLink;
 import com.vaadin.flow.server.InitialPageSettings;
 import com.vaadin.flow.server.PageConfigurator;
+import com.vaadin.flow.server.VaadinService;
 
 
 @Route("")
@@ -27,7 +35,42 @@ public class MainLayout extends VerticalLayout implements PageConfigurator
 	// <generated-code name="initUI">
 	private void initUI()
 	{
+		this.horizontalLayout = new HorizontalLayout();
+		this.routerLink       = new RouterLink();
+		this.textField        = new TextField();
+		this.button           = new Button();
+
+		this.routerLink.setText("RouterLink");
+		if(!Beans.isDesignTime())
+		{
+			this.routerLink.setRoute(VaadinService.getCurrent().getRouter(), Second.class);
+		}
+		this.textField.setMinHeight("");
+		this.textField.setMaxWidth("");
+		this.textField.setReadOnly(true);
+		this.textField.setMaxHeight("");
+		this.textField.setMinWidth("");
+		this.textField.setLabel("Hi was geht");
+		this.textField.setId("buchtext1");
+		this.button.setText("Button");
+
+		this.textField.setSizeUndefined();
+		this.button.setSizeUndefined();
+		this.horizontalLayout.add(this.routerLink, this.textField, this.button);
+		this.horizontalLayout.setFlexGrow(1.0, this.textField);
+		this.horizontalLayout.setWidth("300px");
+		this.horizontalLayout.setHeight("300px");
+		this.add(this.horizontalLayout);
+		this.setHorizontalComponentAlignment(FlexComponent.Alignment.CENTER, this.horizontalLayout);
+		this.setFlexGrow(1.0, this.horizontalLayout);
 		this.setSizeFull();
 	} // </generated-code>
+	
+	// <generated-code name="variables">
+	private Button           button;
+	private HorizontalLayout horizontalLayout;
+	private RouterLink       routerLink;
+	private TextField        textField;
+	// </generated-code>
 	
 }
